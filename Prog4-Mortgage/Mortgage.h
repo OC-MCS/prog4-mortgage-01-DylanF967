@@ -24,6 +24,7 @@ public:
 	double getInterest() const;
 
 
+
 	double FindPayment();
 	double FindTerm(double, double);
 	double FindTotal();
