@@ -80,10 +80,11 @@ double Mortgage::getInterest() const
 void Mortgage::setInterest(double Inter)
 {
 	if (Inter >= 0)
-		Interest = Inter;
+		
+		Interest = Inter/100;
 	else
 	{
-		exit(EXIT_FAILURE);
+		Interest = Inter;
 	}
 }
 

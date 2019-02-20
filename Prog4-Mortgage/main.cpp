@@ -7,17 +7,15 @@
 #include <iostream>
 #include "Mortgage.h"
 #include <string>
+#include <iomanip>
 
 using namespace std;
 
 
 //This calls all the member functions and gets the needed values from them and it asks the user for the needed starting info
 //such as the interest on the loan and the number of years they have been paying the loan.
-//Now the problem I have run into so checking to make sure the user inputted a Number. Isdigit and all of those works for strings but I need the input to be a double so I can actually use it for math.
-// I am at a loss as to how to approach this issue, I tried reading the double into a string and then checking the string to see if it contained a number
-// but I couldn't figure out how to create the correct size of the string for the information.
-// So far every time I've gotten stuck it's been a simple fix such as realizing strcpy_s takes 3 parameters/arguements. I always get mixed up which is which. 
-// So I'm hoping the fix for this is also simple but I am unable to figure it out.
+//Well I thought the to_string would fix the issue I was having but if I put in anything but a number it just crashes
+//So again I'm unsure how to fix this issue.
 
 int main()
 {
@@ -30,11 +28,19 @@ int main()
 	double TotalPaid;
 	
 
-	cout << "What is the interest on this loan? Note that this is a percentage so you need to put in a decimal such as .12 for 12% interest" << endl;
+	cout << "What is the interest on this loan?" << endl;
 	cin >> Interest;
 	
-	
+	//This is what I thought would check to make sure the value was a number before going on to the next cin.
+	//However the program doesn't reach this point instead it just crashes as soon as the cin gets anything but a number.
 
+	string Interest_s;
+	Interest_s = to_string(Interest);
+	while (!isdigit(Interest_s [0]))
+	{
+		cout << "Please input a valid number." << endl;
+		cin >> Interest;
+	}
 
 
 	cout << "What is the number of years you've been paying this loan?" << endl;
@@ -56,7 +62,7 @@ int main()
 
 
 	
-	cout << "This is the amount you must pay every month: $" << House.FindPayment() << endl;
-	cout << "This is the total amount you will have paid by the end of the year: $" << House.FindTotal();
+	cout << "This is the amount you must pay every month: $" << fixed << showpoint << setprecision(2) << House.FindPayment() << endl;
+	cout << "This is the total amount you will have paid by the end of the year: $" << fixed << showpoint << setprecision(2) << House.FindTotal();
 
 }
